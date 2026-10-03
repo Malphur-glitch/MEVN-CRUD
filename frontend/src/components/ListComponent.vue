@@ -28,7 +28,7 @@
 
 <script>
 import axios from 'axios';
-
+const API = import.meta.env.VITE_API_URL || 'http://localhost:4000';
 export default {
   data() {
     return {
@@ -36,14 +36,14 @@ export default {
     };
   },
   created() {
-    let apiURL = 'http://localhost:4000/api';
+    let apiURL = `${API}/api`;
     axios.get(apiURL).then(res => {
       this.Students = res.data;
     }).catch(error => console.log(error));
   },
   methods: {
     deleteStudent(id) {
-      let apiURL = `http://localhost:4000/api/delete-student/${id}`;
+     let apiURL = `${API}/api/delete-student/${id}`;
       let indexOfArrayItem = this.Students.findIndex(i => i._id === id);
       if (window.confirm("Do you really want to delete?")) {
         axios.delete(apiURL).then(() => {
