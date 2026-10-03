@@ -25,7 +25,7 @@
 
 <script>
 import axios from 'axios';
-
+const API = import.meta.env.VITE_API_URL || 'http://localhost:4000';
 export default {
   data() {
     return {
@@ -33,14 +33,14 @@ export default {
     };
   },
   created() {
-    let apiURL = `http://localhost:4000/api/edit-student/${this.$route.params.id}`;
+    let apiURL = `${API}/api/edit-student/${this.$route.params.id}`;
     axios.get(apiURL).then((res) => {
       this.student = res.data;
     }).catch(error => console.log(error));
   },
   methods: {
     handleUpdateForm() {
-      let apiURL = `http://localhost:4000/api/update-student/${this.$route.params.id}`;
+      let apiURL = `${API}/api/update-student/${this.$route.params.id}`;
       axios.put(apiURL, this.student).then(() => {
         this.$router.push('/view');
       }).catch(error => console.log(error));
