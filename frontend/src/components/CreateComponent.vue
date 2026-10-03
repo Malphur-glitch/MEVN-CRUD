@@ -25,6 +25,7 @@
 
 <script>
 import axios from 'axios';
+const API = import.meta.env.VITE_API_URL || 'http://localhost:4000';
 
 export default {
   data() {
@@ -34,7 +35,7 @@ export default {
   },
   methods: {
     handleSubmitForm() {
-      let apiURL = 'http://localhost:4000/api/create-student';
+      let apiURL = `${API}/api/create-student`;
       axios.post(apiURL, this.student).then(() => {
         this.$router.push('/view');
         this.student = { name: '', email: '', phone: '' };
